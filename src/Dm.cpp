@@ -10,13 +10,13 @@
 #include <stdio.h>
 #include <process.h>
 #include <math.h>
-#define w10_2 1
+#define w10_2 0
 #if w10_2
 #include "../include/Dm.h"
 #include "../include/DynamixelSDK.h"
 #else
 #include "Dm.h"
-#include "DynamixelSDK.h"
+//#include "DynamixelSDK.h"
 //#include "dynamixel_sdk/dynamixel_sdk.h"     // Uses Dynamixel SDK library
 //#include "common.h"
 #endif

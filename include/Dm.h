@@ -14,6 +14,7 @@
 #include <math.h>
 #include "Dm.h"
 #include "common.h"
+#include "DynamixelSDK.h"
 //#include "../src/mainlib.h"
 
 int getch();
