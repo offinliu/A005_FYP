@@ -1,0 +1,5 @@
+#include "../include/common.h"
+#include "../include/Dm.h"
+#include "../include/DynamixelSDK.h"
+#include "../include/input_ik.h"
+#include "../include/HEBI.h"
