@@ -11,6 +11,6 @@ double deg2rad(double x);
 double rad2deg(double x);
 int takeinput_keyboard();
 int takeinput_hardware();
-void input_thread(void*);
+void input_thread();
 
 #endif /* input_ik library*/

@@ -1,30 +1,3 @@
-/*******************************************************************************
-* Copyright 2017 ROBOTIS CO., LTD.
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*     http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*******************************************************************************/
-
-/* Author: Ryu Woon Jung (Leon) */
-
-//
-// *********     Sync Read and Sync Write Example      *********
-//
-//
-// Available Dynamixel model on this example : All models using Protocol 2.0
-// This example is tested with two Dynamixel PRO 54-200, and an USB2DYNAMIXEL
-// Be sure that Dynamixel PRO properties are already set as %% ID : 1 / Baudnum : 1 (Baudrate : 57600)
-//
-
 #if defined(__linux__) || defined(__APPLE__)
 #include <fcntl.h>
 #include <termios.h>
@@ -35,8 +8,18 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-
-#include "dynamixel_sdk.h"                                  // Uses Dynamixel SDK library
+#include <thread>
+#include <math.h>
+#define w10_2 0
+#if w10_2
+#include "../include/Dm.h"
+#include "../include/DynamixelSDK.h"
+#else
+#include "Dm.h"
+//#include "DynamixelSDK.h"
+//#include "dynamixel_sdk/dynamixel_sdk.h"     // Uses Dynamixel SDK library
+//#include "common.h"
+#endif
 
 // Control table address
 #define ADDR_PRO_TORQUE_ENABLE          64                 // Control table address is different in Dynamixel model
@@ -59,12 +42,13 @@
 
 #define TORQUE_ENABLE                   1                   // Value for enabling the torque
 #define TORQUE_DISABLE                  0                   // Value for disabling the torque
-#define DXL1_MINIMUM_POSITION_VALUE      0             // Dynamixel will rotate between this value
-#define DXL1_MAXIMUM_POSITION_VALUE      2048              // and this value (note that the Dynamixel would not move when the position value is out of movable range. Check e-manual about the range of the Dynamixel you use.)
-#define DXL_MOVING_STATUS_THRESHOLD     20                  // Dynamixel moving status threshold
-#define DXL2_MINIMUM_POSITION_VALUE     2048
+#define DXL1_MINIMUM_POSITION_VALUE     0             // Dynamixel will rotate between this value
+#define DXL1_MAXIMUM_POSITION_VALUE     4095              // and this value (note that the Dynamixel would not move when the position value is out of movable range. Check e-manual about the range of the Dynamixel you use.)
+#define DXL_MOVING_STATUS_THRESHOLD     10                  // Dynamixel moving status threshold
+#define DXL2_MINIMUM_POSITION_VALUE     0
 #define DXL2_MAXIMUM_POSITION_VALUE     4095
 #define ESC_ASCII_VALUE                 0x1b
+
 
 int getch()
 {
@@ -114,7 +98,7 @@ int kbhit(void)
 #endif
 }
 
-int main()
+int motor_main()
 {
     // Initialize PortHandler instance
     // Set the port path
@@ -136,12 +120,12 @@ int main()
     int dxl_comm_result = COMM_TX_FAIL;               // Communication result
     bool dxl_addparam_result = false;                 // addParam result
     bool dxl_getdata_result = false;                  // GetParam result
-    int dxl1_goal_position[2] = { DXL1_MINIMUM_POSITION_VALUE, DXL1_MAXIMUM_POSITION_VALUE };  // Goal position
-    int dxl2_goal_position[2] = { DXL2_MINIMUM_POSITION_VALUE, DXL2_MAXIMUM_POSITION_VALUE };
+    int dxl1_goal_position;  // Goal position
+    int dxl2_goal_position;
 
     uint8_t dxl_error = 0;                            // Dynamixel error
-    uint8_t param1_goal_position[4];
-    uint8_t param2_goal_position[4];
+    uint8_t param1_goal_position[4]{};
+    uint8_t param2_goal_position[4]{};
     int32_t dxl1_present_position = 0, dxl2_present_position = 0;                         // Present position
 
     // Open port
@@ -153,7 +137,7 @@ int main()
     {
         printf("Failed to open the port!\n");
         printf("Press any key to terminate...\n");
-        getch();
+        _getch();
         return 0;
     }
 
@@ -166,7 +150,7 @@ int main()
     {
         printf("Failed to change the baudrate!\n");
         printf("Press any key to terminate...\n");
-        getch();
+        _getch();
         return 0;
     }
 
@@ -215,39 +199,42 @@ int main()
         fprintf(stderr, "[ID:%03d] groupSyncRead addparam failed", DXL2_ID);
         return 0;
     }
-
-    while (1)
+    dxl1_goal_position = (int)(round((90 + theta_4) / 0.087912));
+    dxl2_goal_position = (int)(round((theta_5) / 0.087912));
+    while (endprog)
     {
         printf("Press any key to continue! (or press ESC to quit!)\n");
-        if (getch() == ESC_ASCII_VALUE)
+        if (_getch() == ESC_ASCII_VALUE)
             break;
+        for (int i = 0; i < 4; i++) {
+            if (i % 2 == 0) {
+                param1_goal_position[i] = DXL_LOBYTE(DXL_LOWORD(dxl1_goal_position));
+                param2_goal_position[i] = DXL_LOBYTE(DXL_LOWORD(dxl2_goal_position));
+            }
+            else {
+                param1_goal_position[i] = DXL_HIBYTE(DXL_LOWORD(dxl1_goal_position));
+                param2_goal_position[i] = DXL_HIBYTE(DXL_LOWORD(dxl2_goal_position));
+            }
+        }
 
-        // Allocate goal position value into byte array
-        param1_goal_position[0] = DXL_LOBYTE(DXL_LOWORD(dxl1_goal_position[index]));
-        param1_goal_position[1] = DXL_HIBYTE(DXL_LOWORD(dxl1_goal_position[index]));
-        param1_goal_position[2] = DXL_LOBYTE(DXL_HIWORD(dxl1_goal_position[index]));
-        param1_goal_position[3] = DXL_HIBYTE(DXL_HIWORD(dxl1_goal_position[index]));
 
-        param2_goal_position[0] = DXL_LOBYTE(DXL_LOWORD(dxl2_goal_position[index]));
-        param2_goal_position[1] = DXL_HIBYTE(DXL_LOWORD(dxl2_goal_position[index]));
-        param2_goal_position[2] = DXL_LOBYTE(DXL_HIWORD(dxl2_goal_position[index]));
-        param2_goal_position[3] = DXL_HIBYTE(DXL_HIWORD(dxl2_goal_position[index]));
         // Add Dynamixel#1 goal position value to the Syncwrite storage
-        dxl_addparam_result = groupSyncWrite.addParam(DXL1_ID, param1_goal_position);
-        if (dxl_addparam_result != true)
-        {
-            fprintf(stderr, "[ID:%03d] groupSyncWrite addparam failed", DXL1_ID);
-            return 0;
-        }
+        for (int i = 0; i < 4; i++) {
+            dxl_addparam_result = groupSyncWrite.addParam(DXL1_ID, (param1_goal_position + i));
+            if (dxl_addparam_result != true)
+            {
+                fprintf(stderr, "[ID:%03d] groupSyncWrite addparam failed", DXL1_ID);
+                return 0;
+            }
 
-        // Add Dynamixel#2 goal position value to the Syncwrite parameter storage
-        dxl_addparam_result = groupSyncWrite.addParam(DXL2_ID, param2_goal_position);
-        if (dxl_addparam_result != true)
-        {
-            fprintf(stderr, "[ID:%03d] groupSyncWrite addparam failed", DXL2_ID);
-            return 0;
+            // Add Dynamixel#2 goal position value to the Syncwrite parameter storage
+            dxl_addparam_result = groupSyncWrite.addParam(DXL2_ID, (param2_goal_position + i));
+            if (dxl_addparam_result != true)
+            {
+                fprintf(stderr, "[ID:%03d] groupSyncWrite addparam failed", DXL2_ID);
+                return 0;
+            }
         }
-
         // Syncwrite goal position
         dxl_comm_result = groupSyncWrite.txPacket();
         if (dxl_comm_result != COMM_SUCCESS) printf("%s\n", packetHandler->getTxRxResult(dxl_comm_result));
@@ -294,9 +281,9 @@ int main()
             // Get Dynamixel#2 present position value
             dxl2_present_position = groupSyncRead.getData(DXL2_ID, ADDR_PRO_PRESENT_POSITION, LEN_PRO_PRESENT_POSITION);
 
-            printf("[ID:%03d] GoalPos:%03d  PresPos:%03d\t[ID:%03d] GoalPos:%03d  PresPos:%03d\n", DXL1_ID, dxl1_goal_position[index], dxl1_present_position, DXL2_ID, dxl2_goal_position[index], dxl2_present_position);
+            printf("[ID:%03d] GoalPos:%03d  PresPos:%03d\t[ID:%03d] GoalPos:%03d  PresPos:%03d\n", DXL1_ID, dxl1_goal_position, dxl1_present_position, DXL2_ID, dxl2_goal_position, dxl2_present_position);
 
-        } while ((abs(dxl1_goal_position[index] - dxl1_present_position) > DXL_MOVING_STATUS_THRESHOLD) || (abs(dxl2_goal_position[index] - dxl2_present_position) > DXL_MOVING_STATUS_THRESHOLD));
+        } while ((abs(dxl1_goal_position - dxl1_present_position) > DXL_MOVING_STATUS_THRESHOLD) || (abs(dxl2_goal_position - dxl2_present_position) > DXL_MOVING_STATUS_THRESHOLD));
 
         // Change goal position
         if (index == 0)
@@ -335,4 +322,15 @@ int main()
     portHandler->closePort();
 
     return 0;
+}
+
+void motor_thread() {
+    int return_value;
+    return_value = 1;
+
+    while (return_value)
+    {
+        return_value = motor_main();
+    }
+    printf("Motor thread ended.");
 }

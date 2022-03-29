@@ -1,2 +1,119 @@
-﻿  main.cpp
-C:\Users\liu95\Documents\GitHub\Main Project V2\src\main.cpp(15,10): fatal error C1083: Cannot open include file: 'pthreads': No such file or directory
+﻿  Dm.cpp
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_bulk_read.h(43,35): warning C4251: 'dynamixel::GroupBulkRead::id_list_': class 'std::vector<uint8_t,std::allocator<uint8_t>>' needs to have dll-interface to be used by clients of class 'dynamixel::GroupBulkRead'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\packet_handler.h(205): message : see declaration of 'std::vector<uint8_t,std::allocator<uint8_t>>'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_bulk_read.h(44,35): warning C4251: 'dynamixel::GroupBulkRead::address_list_': class 'std::map<uint8_t,uint16_t,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint16_t>>>' needs to have dll-interface to be used by clients of class 'dynamixel::GroupBulkRead'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_bulk_read.h(44): message : see declaration of 'std::map<uint8_t,uint16_t,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint16_t>>>'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_bulk_read.h(45,35): warning C4251: 'dynamixel::GroupBulkRead::length_list_': class 'std::map<uint8_t,uint16_t,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint16_t>>>' needs to have dll-interface to be used by clients of class 'dynamixel::GroupBulkRead'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_bulk_read.h(44): message : see declaration of 'std::map<uint8_t,uint16_t,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint16_t>>>'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_bulk_read.h(46,35): warning C4251: 'dynamixel::GroupBulkRead::data_list_': class 'std::map<uint8_t,uint8_t *,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint8_t *>>>' needs to have dll-interface to be used by clients of class 'dynamixel::GroupBulkRead'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_bulk_read.h(46): message : see declaration of 'std::map<uint8_t,uint8_t *,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint8_t *>>>'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_bulk_read.h(47,35): warning C4251: 'dynamixel::GroupBulkRead::error_list_': class 'std::map<uint8_t,uint8_t *,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint8_t *>>>' needs to have dll-interface to be used by clients of class 'dynamixel::GroupBulkRead'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_bulk_read.h(46): message : see declaration of 'std::map<uint8_t,uint8_t *,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint8_t *>>>'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_bulk_write.h(43,35): warning C4251: 'dynamixel::GroupBulkWrite::id_list_': class 'std::vector<uint8_t,std::allocator<uint8_t>>' needs to have dll-interface to be used by clients of class 'dynamixel::GroupBulkWrite'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\packet_handler.h(205): message : see declaration of 'std::vector<uint8_t,std::allocator<uint8_t>>'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_bulk_write.h(44,35): warning C4251: 'dynamixel::GroupBulkWrite::address_list_': class 'std::map<uint8_t,uint16_t,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint16_t>>>' needs to have dll-interface to be used by clients of class 'dynamixel::GroupBulkWrite'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_bulk_read.h(44): message : see declaration of 'std::map<uint8_t,uint16_t,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint16_t>>>'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_bulk_write.h(45,35): warning C4251: 'dynamixel::GroupBulkWrite::length_list_': class 'std::map<uint8_t,uint16_t,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint16_t>>>' needs to have dll-interface to be used by clients of class 'dynamixel::GroupBulkWrite'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_bulk_read.h(44): message : see declaration of 'std::map<uint8_t,uint16_t,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint16_t>>>'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_bulk_write.h(46,35): warning C4251: 'dynamixel::GroupBulkWrite::data_list_': class 'std::map<uint8_t,uint8_t *,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint8_t *>>>' needs to have dll-interface to be used by clients of class 'dynamixel::GroupBulkWrite'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_bulk_read.h(46): message : see declaration of 'std::map<uint8_t,uint8_t *,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint8_t *>>>'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_sync_read.h(43,35): warning C4251: 'dynamixel::GroupSyncRead::id_list_': class 'std::vector<uint8_t,std::allocator<uint8_t>>' needs to have dll-interface to be used by clients of class 'dynamixel::GroupSyncRead'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\packet_handler.h(205): message : see declaration of 'std::vector<uint8_t,std::allocator<uint8_t>>'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_sync_read.h(44,35): warning C4251: 'dynamixel::GroupSyncRead::data_list_': class 'std::map<uint8_t,uint8_t *,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint8_t *>>>' needs to have dll-interface to be used by clients of class 'dynamixel::GroupSyncRead'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_bulk_read.h(46): message : see declaration of 'std::map<uint8_t,uint8_t *,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint8_t *>>>'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_sync_read.h(45,35): warning C4251: 'dynamixel::GroupSyncRead::error_list_': class 'std::map<uint8_t,uint8_t *,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint8_t *>>>' needs to have dll-interface to be used by clients of class 'dynamixel::GroupSyncRead'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_bulk_read.h(46): message : see declaration of 'std::map<uint8_t,uint8_t *,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint8_t *>>>'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_sync_write.h(43,35): warning C4251: 'dynamixel::GroupSyncWrite::id_list_': class 'std::vector<uint8_t,std::allocator<uint8_t>>' needs to have dll-interface to be used by clients of class 'dynamixel::GroupSyncWrite'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\packet_handler.h(205): message : see declaration of 'std::vector<uint8_t,std::allocator<uint8_t>>'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_sync_write.h(44,35): warning C4251: 'dynamixel::GroupSyncWrite::data_list_': class 'std::map<uint8_t,uint8_t *,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint8_t *>>>' needs to have dll-interface to be used by clients of class 'dynamixel::GroupSyncWrite'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_bulk_read.h(46): message : see declaration of 'std::map<uint8_t,uint8_t *,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint8_t *>>>'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\Dm.h(16,5): warning C4273: 'getch': inconsistent dll linkage
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\ucrt\conio.h(444,30): message : see previous definition of 'getch'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\Dm.h(17,5): warning C4273: 'kbhit': inconsistent dll linkage
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\ucrt\conio.h(450,30): message : see previous definition of 'kbhit'
+  input_ik.cpp
+  main.cpp
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_bulk_read.h(43,35): warning C4251: 'dynamixel::GroupBulkRead::id_list_': class 'std::vector<uint8_t,std::allocator<uint8_t>>' needs to have dll-interface to be used by clients of class 'dynamixel::GroupBulkRead'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\packet_handler.h(205): message : see declaration of 'std::vector<uint8_t,std::allocator<uint8_t>>'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_bulk_read.h(44,35): warning C4251: 'dynamixel::GroupBulkRead::address_list_': class 'std::map<uint8_t,uint16_t,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint16_t>>>' needs to have dll-interface to be used by clients of class 'dynamixel::GroupBulkRead'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_bulk_read.h(44): message : see declaration of 'std::map<uint8_t,uint16_t,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint16_t>>>'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_bulk_read.h(45,35): warning C4251: 'dynamixel::GroupBulkRead::length_list_': class 'std::map<uint8_t,uint16_t,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint16_t>>>' needs to have dll-interface to be used by clients of class 'dynamixel::GroupBulkRead'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_bulk_read.h(44): message : see declaration of 'std::map<uint8_t,uint16_t,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint16_t>>>'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_bulk_read.h(46,35): warning C4251: 'dynamixel::GroupBulkRead::data_list_': class 'std::map<uint8_t,uint8_t *,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint8_t *>>>' needs to have dll-interface to be used by clients of class 'dynamixel::GroupBulkRead'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_bulk_read.h(46): message : see declaration of 'std::map<uint8_t,uint8_t *,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint8_t *>>>'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_bulk_read.h(47,35): warning C4251: 'dynamixel::GroupBulkRead::error_list_': class 'std::map<uint8_t,uint8_t *,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint8_t *>>>' needs to have dll-interface to be used by clients of class 'dynamixel::GroupBulkRead'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_bulk_read.h(46): message : see declaration of 'std::map<uint8_t,uint8_t *,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint8_t *>>>'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_bulk_write.h(43,35): warning C4251: 'dynamixel::GroupBulkWrite::id_list_': class 'std::vector<uint8_t,std::allocator<uint8_t>>' needs to have dll-interface to be used by clients of class 'dynamixel::GroupBulkWrite'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\packet_handler.h(205): message : see declaration of 'std::vector<uint8_t,std::allocator<uint8_t>>'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_bulk_write.h(44,35): warning C4251: 'dynamixel::GroupBulkWrite::address_list_': class 'std::map<uint8_t,uint16_t,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint16_t>>>' needs to have dll-interface to be used by clients of class 'dynamixel::GroupBulkWrite'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_bulk_read.h(44): message : see declaration of 'std::map<uint8_t,uint16_t,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint16_t>>>'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_bulk_write.h(45,35): warning C4251: 'dynamixel::GroupBulkWrite::length_list_': class 'std::map<uint8_t,uint16_t,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint16_t>>>' needs to have dll-interface to be used by clients of class 'dynamixel::GroupBulkWrite'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_bulk_read.h(44): message : see declaration of 'std::map<uint8_t,uint16_t,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint16_t>>>'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_bulk_write.h(46,35): warning C4251: 'dynamixel::GroupBulkWrite::data_list_': class 'std::map<uint8_t,uint8_t *,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint8_t *>>>' needs to have dll-interface to be used by clients of class 'dynamixel::GroupBulkWrite'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_bulk_read.h(46): message : see declaration of 'std::map<uint8_t,uint8_t *,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint8_t *>>>'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_sync_read.h(43,35): warning C4251: 'dynamixel::GroupSyncRead::id_list_': class 'std::vector<uint8_t,std::allocator<uint8_t>>' needs to have dll-interface to be used by clients of class 'dynamixel::GroupSyncRead'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\packet_handler.h(205): message : see declaration of 'std::vector<uint8_t,std::allocator<uint8_t>>'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_sync_read.h(44,35): warning C4251: 'dynamixel::GroupSyncRead::data_list_': class 'std::map<uint8_t,uint8_t *,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint8_t *>>>' needs to have dll-interface to be used by clients of class 'dynamixel::GroupSyncRead'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_bulk_read.h(46): message : see declaration of 'std::map<uint8_t,uint8_t *,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint8_t *>>>'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_sync_read.h(45,35): warning C4251: 'dynamixel::GroupSyncRead::error_list_': class 'std::map<uint8_t,uint8_t *,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint8_t *>>>' needs to have dll-interface to be used by clients of class 'dynamixel::GroupSyncRead'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_bulk_read.h(46): message : see declaration of 'std::map<uint8_t,uint8_t *,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint8_t *>>>'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_sync_write.h(43,35): warning C4251: 'dynamixel::GroupSyncWrite::id_list_': class 'std::vector<uint8_t,std::allocator<uint8_t>>' needs to have dll-interface to be used by clients of class 'dynamixel::GroupSyncWrite'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\packet_handler.h(205): message : see declaration of 'std::vector<uint8_t,std::allocator<uint8_t>>'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_sync_write.h(44,35): warning C4251: 'dynamixel::GroupSyncWrite::data_list_': class 'std::map<uint8_t,uint8_t *,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint8_t *>>>' needs to have dll-interface to be used by clients of class 'dynamixel::GroupSyncWrite'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_bulk_read.h(46): message : see declaration of 'std::map<uint8_t,uint8_t *,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint8_t *>>>'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\Dm.h(16,5): warning C4273: 'getch': inconsistent dll linkage
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\ucrt\conio.h(444,30): message : see previous definition of 'getch'
+C:\Users\liu95\Documents\GitHub\Main Project V2\include\Dm.h(17,5): warning C4273: 'kbhit': inconsistent dll linkage
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\ucrt\conio.h(450,30): message : see previous definition of 'kbhit'
+C:\Users\liu95\Documents\GitHub\Main Project V2\src\main.cpp(65,17): warning C4244: '=': conversion from 'time_t' to 'int', possible loss of data
+C:\Users\liu95\Documents\GitHub\Main Project V2\src\main.cpp(68,10): warning C4477: 'printf' : format string '%ld' requires an argument of type 'long', but variadic argument 1 has type 'time_t'
+C:\Users\liu95\Documents\GitHub\Main Project V2\src\main.cpp(68,10): message : consider using '%lld' in the format string
+C:\Users\liu95\Documents\GitHub\Main Project V2\src\main.cpp(68,10): message : consider using '%Id' in the format string
+C:\Users\liu95\Documents\GitHub\Main Project V2\src\main.cpp(68,10): message : consider using '%I64d' in the format string
+C:\Users\liu95\Documents\GitHub\Main Project V2\src\main.cpp(55,6): warning C4101: 'check_ik': unreferenced local variable
+C:\Users\liu95\Documents\GitHub\Main Project V2\src\main.cpp(56,6): warning C4101: 'check_dm': unreferenced local variable
+  Generating Code...
+input_ik.obj : error LNK2005: "double a1" (?a1@@3NA) already defined in Dm.obj
+input_ik.obj : error LNK2005: "double a2" (?a2@@3NA) already defined in Dm.obj
+input_ik.obj : error LNK2005: "double a3" (?a3@@3NA) already defined in Dm.obj
+input_ik.obj : error LNK2005: "double r3" (?r3@@3NA) already defined in Dm.obj
+input_ik.obj : error LNK2005: "double a4" (?a4@@3NA) already defined in Dm.obj
+input_ik.obj : error LNK2005: "double x4" (?x4@@3NA) already defined in Dm.obj
+input_ik.obj : error LNK2005: "double y4" (?y4@@3NA) already defined in Dm.obj
+input_ik.obj : error LNK2005: "double alpha" (?alpha@@3NA) already defined in Dm.obj
+input_ik.obj : error LNK2005: "double beta" (?beta@@3NA) already defined in Dm.obj
+input_ik.obj : error LNK2005: "double pi" (?pi@@3NA) already defined in Dm.obj
+input_ik.obj : error LNK2005: "double x" (?x@@3NA) already defined in Dm.obj
+input_ik.obj : error LNK2005: "double y" (?y@@3NA) already defined in Dm.obj
+input_ik.obj : error LNK2005: "double z" (?z@@3NA) already defined in Dm.obj
+input_ik.obj : error LNK2005: "double phi" (?phi@@3NA) already defined in Dm.obj
+input_ik.obj : error LNK2005: "double sigma" (?sigma@@3NA) already defined in Dm.obj
+input_ik.obj : error LNK2005: "double theta_1" (?theta_1@@3NA) already defined in Dm.obj
+input_ik.obj : error LNK2005: "double theta_2" (?theta_2@@3NA) already defined in Dm.obj
+input_ik.obj : error LNK2005: "double theta_3" (?theta_3@@3NA) already defined in Dm.obj
+input_ik.obj : error LNK2005: "double theta_4" (?theta_4@@3NA) already defined in Dm.obj
+input_ik.obj : error LNK2005: "double theta_5" (?theta_5@@3NA) already defined in Dm.obj
+input_ik.obj : error LNK2005: "int endprog" (?endprog@@3HA) already defined in Dm.obj
+main.obj : error LNK2005: "double a1" (?a1@@3NA) already defined in Dm.obj
+main.obj : error LNK2005: "double a2" (?a2@@3NA) already defined in Dm.obj
+main.obj : error LNK2005: "double a3" (?a3@@3NA) already defined in Dm.obj
+main.obj : error LNK2005: "double r3" (?r3@@3NA) already defined in Dm.obj
+main.obj : error LNK2005: "double a4" (?a4@@3NA) already defined in Dm.obj
+main.obj : error LNK2005: "double x4" (?x4@@3NA) already defined in Dm.obj
+main.obj : error LNK2005: "double y4" (?y4@@3NA) already defined in Dm.obj
+main.obj : error LNK2005: "double alpha" (?alpha@@3NA) already defined in Dm.obj
+main.obj : error LNK2005: "double beta" (?beta@@3NA) already defined in Dm.obj
+main.obj : error LNK2005: "double pi" (?pi@@3NA) already defined in Dm.obj
+main.obj : error LNK2005: "double x" (?x@@3NA) already defined in Dm.obj
+main.obj : error LNK2005: "double y" (?y@@3NA) already defined in Dm.obj
+main.obj : error LNK2005: "double z" (?z@@3NA) already defined in Dm.obj
+main.obj : error LNK2005: "double phi" (?phi@@3NA) already defined in Dm.obj
+main.obj : error LNK2005: "double sigma" (?sigma@@3NA) already defined in Dm.obj
+main.obj : error LNK2005: "double theta_1" (?theta_1@@3NA) already defined in Dm.obj
+main.obj : error LNK2005: "double theta_2" (?theta_2@@3NA) already defined in Dm.obj
+main.obj : error LNK2005: "double theta_3" (?theta_3@@3NA) already defined in Dm.obj
+main.obj : error LNK2005: "double theta_4" (?theta_4@@3NA) already defined in Dm.obj
+main.obj : error LNK2005: "double theta_5" (?theta_5@@3NA) already defined in Dm.obj
+main.obj : error LNK2005: "int endprog" (?endprog@@3HA) already defined in Dm.obj
+     Creating library C:\Users\liu95\Documents\GitHub\Main Project V2\x64\Debug\Main Project V2.lib and object C:\Users\liu95\Documents\GitHub\Main Project V2\x64\Debug\Main Project V2.exp
+C:\Users\liu95\Documents\GitHub\Main Project V2\x64\Debug\Main Project V2.exe : fatal error LNK1169: one or more multiply defined symbols found

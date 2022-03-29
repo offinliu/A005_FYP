@@ -11,7 +11,8 @@
 #include <stdlib.h>
 #include <thread>
 #include <math.h>
-#define w10_2 1
+#include <mutex>
+#define w10_2 0
 #if w10_2
 #include "../include/input_ik.h"
 #else
@@ -20,6 +21,7 @@
 #endif
 
 
+std::mutex gV;
 
 double deg2rad(double x) {
 	x = pi / 180 * x;
@@ -45,7 +47,7 @@ void inverse_kinematics() {
 	double delta;
 	int test_mode = 1; // 1 for 5 dof. 2 for 3 dof
 	if (test_mode == 1) {
-		wz = pz - r3 * sin(phi + beta) - x4 * sin(sigma) * sin(phi); // translate z5 to z3
+		wz = pz - r3 * sin(phi + alpha_2) - x4 * sin(sigma) * sin(phi); // translate z5 to z3
 		//printf("wz= ", round(wz));
 		double r = pow((pow(px,2) + pow(py,2)),0.5); // magnitude in(x0, y0)
 		//printf("Postion Vector Mag = ", round(r));
@@ -55,7 +57,7 @@ void inverse_kinematics() {
 		theta_1 = theta_1 - Dtheta_1; // Joint_1 angular displacement
 		r = ry / tan(Dtheta_1) - x4 * sin(sigma) * cos(phi);// translate x5y5 to x4y4
 		//printf("PV Mag for 4 DOF= ", round(r));
-		r = r - r3 * cos(phi + beta); // translate x4y4 to x3y3
+		r = r - r3 * cos(phi + alpha_2); // translate x4y4 to x3y3
 		//printf("PV Mag for 3 DOF= ", round(r));
 		double wx = r * cos(theta_1); // not in use
 		double wy = r * sin(theta_1); // not in use
@@ -103,7 +105,7 @@ int takeinput_keyboard() {
 			else if (ti == 'x') return 8;
 			else if (ti == 'r') return 9;
 			else if (ti == 'f') return 10;
-			else if (ti == 'p') return 99;
+			else if (ti == 27) return 99;
 		}
 		else printf("Invalid input. Try again. w/s for x0. a/d for y0. z/x for z0. q/e for phi. r/f for sigma");
 	}
@@ -116,7 +118,7 @@ int takeinput_hardware() {
 	return 0;
 }
 
-void input_thread(void*) {
+void input_thread() {
 
 	char takeinput;
 	int keyboard_input = 1;
@@ -125,6 +127,7 @@ void input_thread(void*) {
 	if( keyboard_input) takeinput = takeinput_keyboard();
 	else takeinput = takeinput_hardware();
 		while (endprog) {
+			gV.lock();
 			if (takeinput == 1) x += 5;
 
 			else if (takeinput == 2) x -= 5;
@@ -146,8 +149,11 @@ void input_thread(void*) {
 			else if (takeinput == 10) sigma -= 5;
 
 			else if (takeinput == 99) endprog = 0;
+			gV.unlock();
 		}
+		gV.lock();
 		inverse_kinematics();
+		gV.unlock();
 	}
 	//return 0;
 

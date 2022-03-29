@@ -13,7 +13,7 @@ double a4; // Distance between x4y4z4 and x5y5z5
 double x4; // length of brace
 double y4; // height of brace from x4y4z4
 double alpha; // link 4 aux angle
-double beta; // link 3 aux angle
+double alpha_2; // link 3 aux angle
 double pi; // pi value. 
 
 // declaration of global values
@@ -27,6 +27,6 @@ double theta_2;
 double theta_3;
 double theta_4;
 double theta_5;
-int endprog = 1;
+int endprog;
 
 #endif

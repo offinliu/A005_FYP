@@ -12,15 +12,15 @@
 #include <mutex>
 #include <math.h>
 #include <Windows.h>
-#include <pthreads>
-#define w10_2 1
+//#include <pthreads>
+#define w10_2 0
 #if w10_2
 #include "../include/mainlib.h"
 //#include "../include/input_ik.h"
 //#include "../include/Dm.h"
 #else 
-//#include "Dm.h"
-//#include "input_ik.h"
+#include "Dm.h"
+#include "input_ik.h"
 #include "common.h"
 #endif
 #if defined(__linux__) || defined(__APPLE__)
@@ -42,7 +42,7 @@ int main(int argc, char* argv[]) {
 	x4 = 172; // length of brace
 	y4 = 53.62; // height of brace from x4y4z4
 	alpha = deg2rad(17.31); // link 4 aux angle
-	beta = deg2rad(33.26); // link 3 aux angle
+	alpha_2 = deg2rad(33.26); // link 3 aux angle
 	pi = atan(1) * 4; // pi value. 
 	endprog = 1;
 	x = 671.0;
@@ -50,13 +50,14 @@ int main(int argc, char* argv[]) {
 	z = 199.0;
 	phi = 0.0;
 	sigma = 90.0;
+	char dum;
 	int cur_time;
 	int check_ik;
 	int check_dm;
 	//create threads...
 	endprog = 1;
 	printf("Initial position. strap arm brace to forearm.Press ENTER to continue\n");
-	getchar();
+	dum=getchar();
 	gv.lock();
 	gv.unlock();
 	std::thread input_ik(input_thread);
