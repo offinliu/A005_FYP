@@ -9,10 +9,8 @@
 #include <stdlib.h>
 #include <iostream>
 #include <thread>
-#include <mutex>
 #include <math.h>
 #include <Windows.h>
-//#include <pthreads>
 #define w10_2 0
 #if w10_2
 #include "../include/mainlib.h"
@@ -20,7 +18,7 @@
 //#include "../include/Dm.h"
 #else 
 #include "Dm.h"
-#include "input_ik.h"
+#include "Input_ik.h"
 #include "common.h"
 #endif
 #if defined(__linux__) || defined(__APPLE__)
@@ -30,8 +28,7 @@
 #elif defined(_WIN32) || defined(_WIN64)
 #include <conio.h>
 #endif
-using namespace std;
-std::mutex gv;
+
 int main(int argc, char* argv[]) {
 	// initialize values to home positon in mm and deg
 	a1 = 371; // link 1
@@ -51,9 +48,8 @@ int main(int argc, char* argv[]) {
 	phi = 0.0;
 	sigma = 90.0;
 	char dum;
-	int cur_time;
-	int check_ik;
-	int check_dm;
+	long int start_time;
+	long int cur_time;
 	//create threads...
 	endprog = 1;
 	printf("Initial position. strap arm brace to forearm.Press ENTER to continue\n");
@@ -62,10 +58,11 @@ int main(int argc, char* argv[]) {
 	gv.unlock();
 	std::thread input_ik(input_thread);
 	std::thread Dm(motor_thread);
-	cur_time = time(NULL);
+	start_time = time(NULL);
 	while (endprog)
 	{
-		printf("Time: %ld", (time(NULL) - cur_time));
+		cur_time = time(NULL) - start_time;
+		printf("Time: %ld seconds", cur_time);
 		Sleep(1000);
 	}
 	input_ik.join();

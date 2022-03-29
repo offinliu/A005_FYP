@@ -9,19 +9,15 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <thread>
 #include <math.h>
-#include <mutex>
 #define w10_2 0
 #if w10_2
 #include "../include/input_ik.h"
 #else
-#include "input_ik.h"
+#include "Input_ik.h"
 //#include "common.h"
 #endif
 
-
-std::mutex gV;
 
 double deg2rad(double x) {
 	x = pi / 180 * x;
@@ -127,7 +123,7 @@ void input_thread() {
 	if( keyboard_input) takeinput = takeinput_keyboard();
 	else takeinput = takeinput_hardware();
 		while (endprog) {
-			gV.lock();
+			gv.lock();
 			if (takeinput == 1) x += 5;
 
 			else if (takeinput == 2) x -= 5;
@@ -149,11 +145,11 @@ void input_thread() {
 			else if (takeinput == 10) sigma -= 5;
 
 			else if (takeinput == 99) endprog = 0;
-			gV.unlock();
+			gv.unlock();
 		}
-		gV.lock();
+		gv.lock();
 		inverse_kinematics();
-		gV.unlock();
+		gv.unlock();
 	}
 	//return 0;
 

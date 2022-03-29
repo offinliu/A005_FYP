@@ -1,9 +1,9 @@
 #ifndef MAINLIB
 #define MAINLIB
 #include "common.h"
-#include "Dm.h"
+#include "dm.h"
 #include "input_ik.h"
-#include "HEBI.h"
+#include "HEBI_thread.h"
 
 
 #endif //MAINLIB

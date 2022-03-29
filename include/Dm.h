@@ -13,8 +13,8 @@
 #include "DynamixelSDK.h"
 //#include "../src/mainlib.h"
 
-int getch();
-int kbhit(void);
+//int getch();
+//int kbhit(void);
 //unsigned int __stdcall motor_thread(void*);
 int motor_main();
 void motor_thread();

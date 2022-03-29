@@ -8,7 +8,6 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <thread>
 #include <math.h>
 #define w10_2 0
 #if w10_2
@@ -199,8 +198,10 @@ int motor_main()
         fprintf(stderr, "[ID:%03d] groupSyncRead addparam failed", DXL2_ID);
         return 0;
     }
+    gv.lock();
     dxl1_goal_position = (int)(round((90 + theta_4) / 0.087912));
     dxl2_goal_position = (int)(round((theta_5) / 0.087912));
+    gv.unlock();
     while (endprog)
     {
         printf("Press any key to continue! (or press ESC to quit!)\n");

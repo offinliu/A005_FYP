@@ -1,7 +1,9 @@
 #ifndef COMMON
 #define COMMON
 #include <stdio.h>
-
+#include <mutex>
+using namespace std;
+std::mutex gv;
 
 //Parameters for calculation
 // Length of links in mm
