@@ -2,6 +2,7 @@
 #define COMMON
 #include <stdio.h>
 
+
 //Parameters for calculation
 // Length of links in mm
 double a1; // link 1

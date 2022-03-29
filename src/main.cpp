@@ -6,24 +6,32 @@
 * ************************************************************/
 
 #include <stdio.h>
-#include <thread>
 #include <stdlib.h>
-#include <algorithm>
 #include <iostream>
-#include <Windows.h>
-#include <process.h>
+#include <thread>
+#include <mutex>
 #include <math.h>
-#define w10_2 0
+#include <Windows.h>
+#include <pthreads>
+#define w10_2 1
 #if w10_2
-#include "../include/common.h"
-#include "../include/input_ik.h"
-#include "../include/Dm.h"
+#include "../include/mainlib.h"
+//#include "../include/input_ik.h"
+//#include "../include/Dm.h"
 #else 
-#include "Dm.h"
-#include "input_ik.h"
+//#include "Dm.h"
+//#include "input_ik.h"
 #include "common.h"
 #endif
-
+#if defined(__linux__) || defined(__APPLE__)
+#include <fcntl.h>
+#include <termios.h>
+#define STDIN_FILENO 0
+#elif defined(_WIN32) || defined(_WIN64)
+#include <conio.h>
+#endif
+using namespace std;
+std::mutex gv;
 int main(int argc, char* argv[]) {
 	// initialize values to home positon in mm and deg
 	a1 = 371; // link 1
@@ -42,16 +50,25 @@ int main(int argc, char* argv[]) {
 	z = 199.0;
 	phi = 0.0;
 	sigma = 90.0;
-
-
+	int cur_time;
+	int check_ik;
+	int check_dm;
 	//create threads...
 	endprog = 1;
 	printf("Initial position. strap arm brace to forearm.Press ENTER to continue\n");
-	_getch();
-	HANDLE ikhandle;
-	ikhandle = (HANDLE)_beginthreadex(0, 0, &input_thread, 0, 0, 0);
-	HANDLE dmhandle;
-	//dmhandle = (HANDLE)_beginthreadex(0, 0, &motor_thread, 0, 0, 0);
+	getchar();
+	gv.lock();
+	gv.unlock();
+	std::thread input_ik(input_thread);
+	std::thread Dm(motor_thread);
+	cur_time = time(NULL);
+	while (endprog)
+	{
+		printf("Time: %ld", (time(NULL) - cur_time));
+		Sleep(1000);
+	}
+	input_ik.join();
+	Dm.join();
 
 	return 0;
 }

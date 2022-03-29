@@ -9,18 +9,14 @@
 #endif
 
 #include <stdlib.h>
-#include <stdio.h>
-#include <process.h>
-#include <math.h>
-#include "Dm.h"
 #include "common.h"
-#include "DynamixelSDK.h"
+//#include "DynamixelSDK.h"
 //#include "../src/mainlib.h"
 
 int getch();
 int kbhit(void);
-unsigned int __stdcall motor_thread(void*);
-//int motor_thread(void*);
+//unsigned int __stdcall motor_thread(void*);
+int motor_thread(void*);
 
 
 #endif /* DM library */

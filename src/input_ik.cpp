@@ -9,9 +9,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <Windows.h>
+#include <thread>
 #include <math.h>
-#define w10_2 0
+#define w10_2 1
 #if w10_2
 #include "../include/input_ik.h"
 #else
@@ -116,7 +116,7 @@ int takeinput_hardware() {
 	return 0;
 }
 
-unsigned int __stdcall input_thread(void*) {
+void input_thread(void*) {
 
 	char takeinput;
 	int keyboard_input = 1;
@@ -149,6 +149,6 @@ unsigned int __stdcall input_thread(void*) {
 		}
 		inverse_kinematics();
 	}
-	return 0;
+	//return 0;
 
 }

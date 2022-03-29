@@ -1,5 +1,9 @@
-#include "../include/common.h"
-#include "../include/Dm.h"
-#include "../include/DynamixelSDK.h"
-#include "../include/input_ik.h"
-#include "../include/HEBI.h"
+#ifndef MAINLIB
+#define MAINLIB
+#include "common.h"
+#include "Dm.h"
+#include "input_ik.h"
+#include "HEBI.h"
+
+
+#endif //MAINLIB
