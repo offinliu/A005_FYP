@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#include <mutex>
 #define w10_2 0
 #if w10_2
 #include "../include/Dm.h"
@@ -48,7 +49,8 @@
 #define DXL2_MAXIMUM_POSITION_VALUE     4095
 #define ESC_ASCII_VALUE                 0x1b
 
-
+//using namespace std;
+//std::mutex gv;
 int getch()
 {
 #if defined(__linux__) || defined(__APPLE__)
@@ -97,7 +99,8 @@ int kbhit(void)
 #endif
 }
 
-int motor_main()
+
+int dm_main(double *theta_4, double *theta_5, int *endprog)
 {
     // Initialize PortHandler instance
     // Set the port path
@@ -198,15 +201,16 @@ int motor_main()
         fprintf(stderr, "[ID:%03d] groupSyncRead addparam failed", DXL2_ID);
         return 0;
     }
-    gv.lock();
-    dxl1_goal_position = (int)(round((90 + theta_4) / 0.087912));
-    dxl2_goal_position = (int)(round((theta_5) / 0.087912));
-    gv.unlock();
-    while (endprog)
+
+    while (*endprog)
     {
         printf("Press any key to continue! (or press ESC to quit!)\n");
         if (_getch() == ESC_ASCII_VALUE)
             break;
+        //gv.lock();
+        dxl1_goal_position = (int)(round((90 + *theta_4) / 0.087912));
+        dxl2_goal_position = (int)(round((*theta_5) / 0.087912));
+        //gv.unlock();
         for (int i = 0; i < 4; i++) {
             if (i % 2 == 0) {
                 param1_goal_position[i] = DXL_LOBYTE(DXL_LOWORD(dxl1_goal_position));
@@ -324,14 +328,15 @@ int motor_main()
 
     return 0;
 }
-
+/*
 void motor_thread() {
     int return_value;
     return_value = 1;
 
     while (return_value)
     {
-        return_value = motor_main();
+        return_value = dm_main();
     }
     printf("Motor thread ended.");
 }
+*/

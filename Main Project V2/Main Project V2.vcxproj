@@ -79,7 +79,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <LibraryPath>..\build\win_x64;..\build\win64\output;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(LibraryPath)</LibraryPath>
-    <IncludePath>$(VC_IncludePath);dxl_x64_cpp.lib;hebi.lib;$(IncludePath)</IncludePath>
+    <IncludePath>$(VC_IncludePath);dxl_x64_cpp.lib;hebi.lib;..\build\win64\output\dxl_x64_cpp.dll</IncludePath>
+    <ReferencePath>..\build\win64\output\dxl_x64_cpp.dll;$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -159,7 +160,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Dm.cpp" />
-    <ClCompile Include="..\src\HEBI_thread.cpp" />
     <ClCompile Include="..\src\input_ik.cpp" />
     <ClCompile Include="..\src\main.cpp" />
   </ItemGroup>

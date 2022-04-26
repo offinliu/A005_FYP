@@ -9,15 +9,15 @@
 #endif
 
 #include <stdlib.h>
-#include "common.h"
+//#include "common.h"
 #include "DynamixelSDK.h"
 //#include "../src/mainlib.h"
 
 //int getch();
 //int kbhit(void);
 //unsigned int __stdcall motor_thread(void*);
-int motor_main();
-void motor_thread();
+int dm_main(double* theta_4, double* theta_5, int *endprog);
+//void motor_thread();
 
 
 #endif /* DM library */

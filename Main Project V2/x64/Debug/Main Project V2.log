@@ -27,12 +27,10 @@ C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_sync
 C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\packet_handler.h(205): message : see declaration of 'std::vector<uint8_t,std::allocator<uint8_t>>'
 C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_sync_write.h(44,35): warning C4251: 'dynamixel::GroupSyncWrite::data_list_': class 'std::map<uint8_t,uint8_t *,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint8_t *>>>' needs to have dll-interface to be used by clients of class 'dynamixel::GroupSyncWrite'
 C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_bulk_read.h(46): message : see declaration of 'std::map<uint8_t,uint8_t *,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint8_t *>>>'
-C:\Users\liu95\Documents\GitHub\Main Project V2\src\Dm.cpp(52,5): warning C4273: 'getch': inconsistent dll linkage
+C:\Users\liu95\Documents\GitHub\Main Project V2\src\Dm.cpp(54,5): warning C4273: 'getch': inconsistent dll linkage
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\ucrt\conio.h(444,30): message : see previous definition of 'getch'
-C:\Users\liu95\Documents\GitHub\Main Project V2\src\Dm.cpp(69,5): warning C4273: 'kbhit': inconsistent dll linkage
+C:\Users\liu95\Documents\GitHub\Main Project V2\src\Dm.cpp(71,5): warning C4273: 'kbhit': inconsistent dll linkage
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\ucrt\conio.h(450,30): message : see previous definition of 'kbhit'
-  HEBI_thread.cpp
-C:\Users\liu95\Documents\GitHub\Main Project V2\src\group_feedback.hpp(7,10): fatal error C1083: Cannot open include file: 'Eigen/Eigen': No such file or directory
   input_ik.cpp
   main.cpp
 C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_bulk_read.h(43,35): warning C4251: 'dynamixel::GroupBulkRead::id_list_': class 'std::vector<uint8_t,std::allocator<uint8_t>>' needs to have dll-interface to be used by clients of class 'dynamixel::GroupBulkRead'
@@ -63,6 +61,8 @@ C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_sync
 C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\packet_handler.h(205): message : see declaration of 'std::vector<uint8_t,std::allocator<uint8_t>>'
 C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_sync_write.h(44,35): warning C4251: 'dynamixel::GroupSyncWrite::data_list_': class 'std::map<uint8_t,uint8_t *,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint8_t *>>>' needs to have dll-interface to be used by clients of class 'dynamixel::GroupSyncWrite'
 C:\Users\liu95\Documents\GitHub\Main Project V2\include\dynamixel_sdk\group_bulk_read.h(46): message : see declaration of 'std::map<uint8_t,uint8_t *,std::less<uint8_t>,std::allocator<std::pair<const uint8_t,uint8_t *>>>'
-C:\Users\liu95\Documents\GitHub\Main Project V2\src\main.cpp(61,19): warning C4244: '=': conversion from 'time_t' to 'long', possible loss of data
-C:\Users\liu95\Documents\GitHub\Main Project V2\src\main.cpp(64,25): warning C4244: '=': conversion from 'time_t' to 'long', possible loss of data
+C:\Users\liu95\Documents\GitHub\Main Project V2\src\main.cpp(127,19): warning C4244: '=': conversion from 'time_t' to 'long', possible loss of data
+C:\Users\liu95\Documents\GitHub\Main Project V2\src\main.cpp(130,25): warning C4244: '=': conversion from 'time_t' to 'long', possible loss of data
   Generating Code...
+     Creating library C:\Users\liu95\Documents\GitHub\Main Project V2\x64\Debug\Main Project V2.lib and object C:\Users\liu95\Documents\GitHub\Main Project V2\x64\Debug\Main Project V2.exp
+  Main Project V2.vcxproj -> C:\Users\liu95\Documents\GitHub\Main Project V2\x64\Debug\Main Project V2.exe

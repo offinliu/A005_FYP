@@ -28,7 +28,7 @@ using namespace hebi;
 
 namespace plt = matplotlibcpp;
 
-int main()
+int main_o()
 {
 
     // Get a group
