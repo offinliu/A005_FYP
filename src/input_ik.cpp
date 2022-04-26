@@ -10,7 +10,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#define w10_2 0
+#include <conio.h>
+#define w10_2 1
 #if w10_2
 #include "../include/input_ik.h"
 #else
@@ -21,11 +22,11 @@
 double pi = atan(1) * 4; // pi value. 
 
 double deg2rad(double x) {
-	x = pi / 180 * x;
+	x = (pi / 180) * x;
 	return x;
 }
 double rad2deg(double x) {
-	x = 180 / pi * x;
+	x = (180 / pi) * x;
 	return x;
 }
 void inverse_kinematics(double x, double y, double z, double *phi_o, double *sigma_o, double *theta_1_o, double *theta_2_o, double *theta_3_o, double* theta_4_o, double* theta_5_o) {
@@ -59,7 +60,7 @@ void inverse_kinematics(double x, double y, double z, double *phi_o, double *sig
 	if (test_mode == 1) {
 		wz = pz - r3 * sin(phi + alpha_2) - x4 * sin(sigma) * sin(phi); // translate z5 to z3
 		//printf("wz= ", round(wz));
-		double r = pow((pow(px,2) + pow(py,2)),0.5); // magnitude in(x0, y0)
+		r = pow((pow(px,2) + pow(py,2)),0.5); // magnitude in(x0, y0)
 		//printf("Postion Vector Mag = ", round(r));
 		theta_1 = atan2(py, px); // Angle of Position vector in x0y0z0
 		double ry = x4 * cos(sigma); // Displacement about z0 from x5y5 to x4y4
@@ -77,7 +78,7 @@ void inverse_kinematics(double x, double y, double z, double *phi_o, double *sig
 		wz = pz;
 		r = pow(pow(px,2) + pow(py,2),2);
 	}
-	delta = (pow(wz,2) + pow(r,2));  // radius ^ 2 on 3D polar plane
+	delta = pow(wz,2) + pow(r,2);  // radius ^ 2 on 3D polar plane
 	double c3 = (delta - pow(a1,2) - pow(a2,2)) / (2 * a1 * a2); //cosine rule
 	double s3 = sqrt(1 - pow(c3,2));  // trigo identity
 	double theta_3 = atan2(s3, c3);
@@ -94,13 +95,16 @@ void inverse_kinematics(double x, double y, double z, double *phi_o, double *sig
 	theta_3 = rad2deg(theta_3);
 	theta_4 = rad2deg(theta_4);
 	theta_5 = rad2deg(theta_5);
-	*theta_1_o = theta_1;
-	*theta_2_o = theta_2;
-	*theta_3_o = theta_3;
-	*theta_4_o = theta_4;
-	*theta_5_o = theta_5;
-	printf("Theta_1 = %.2f. Theta_2 = %.2f. Theta_3 = %.2f. Theta_4 = %.2f. Theta_5 = %.2f.", theta_1, theta_2, theta_3,
+	if (theta_1 && theta_2 && theta_3 && theta_4 && theta_5) {
+		*theta_1_o = theta_1;
+		*theta_2_o = theta_2;
+		*theta_3_o = theta_3;
+		*theta_4_o = theta_4;
+		*theta_5_o = theta_5;
+	}
+	printf("Theta_1 = %.2f. Theta_2 = %.2f. Theta_3 = %.2f. Theta_4 = %.2f. Theta_5 = %.2f.\n", theta_1, theta_2, theta_3,
 		theta_4, theta_5);
+	printf("x = %.2f, y = %.2f, z = %.2f \n", x, y, z);
 
 }
 
@@ -108,7 +112,7 @@ int takeinput_keyboard() {
 	char ti;
 	while (1) 
 	{
-		ti = getchar();
+		ti = _getch();
 		if (ti == 'w' || ti == 's' || ti == 'a' || ti == 'd' || ti == 'q' || ti == 'e' || ti == 'z' || ti == 'x' || ti == 'r' || ti == 'f'|| ti == 'p') {
 			if (ti == 'w') return 1;
 			else if (ti == 's') return 2;
@@ -120,9 +124,9 @@ int takeinput_keyboard() {
 			else if (ti == 'x') return 8;
 			else if (ti == 'r') return 9;
 			else if (ti == 'f') return 10;
-			else if (ti == 27) return 99;
+			else if (ti == 'p') return 11;
 		}
-		else printf("Invalid input. Try again. w/s for x0. a/d for y0. z/x for z0. q/e for phi. r/f for sigma");
+		else printf("Invalid input. Try again. w/s for x0. a/d for y0. z/x for z0. q/e for phi. r/f for sigma\n");
 	}
 
 }

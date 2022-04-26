@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <mutex>
-#define w10_2 0
+#define w10_2 1
 #if w10_2
 #include "../include/Dm.h"
 #include "../include/DynamixelSDK.h"

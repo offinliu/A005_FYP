@@ -30,9 +30,6 @@
     <ClInclude Include="..\include\input_ik.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\mainlib.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\HEBI_thread.h">
       <Filter>Header Files</Filter>
     </ClInclude>
