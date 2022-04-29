@@ -153,7 +153,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="..\include\hebi.h" />
-    <ClInclude Include="..\include\HEBI_thread.h" />
     <ClInclude Include="..\include\input_ik.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>

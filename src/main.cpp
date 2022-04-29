@@ -16,6 +16,7 @@
 //#include "../include/mainlib.h"
 #include "../include/input_ik.h"
 #include "../include/Dm.h"
+#include "../include/Hm.h"
 #else 
 #include "Dm.h"
 #include "Input_ik.h"
@@ -53,23 +54,23 @@ int input_thread() {
 			gv.lock();
 			if (takeinput == 1) { x += 5; printf("x = %.2f\n", x); }
 
-			else if (takeinput == 2) { x -= 5; printf("x = %.2f\n", x); }
+			else if (takeinput == 2) { x -= 1; printf("x = %.2f\n", x); }
 
-			else if (takeinput == 3) { y += 5; printf("y = %.2f\n", y); }
+			else if (takeinput == 3) { y += 1; printf("y = %.2f\n", y); }
 
-			else if (takeinput == 4) { y -= 5; printf("y = %.2f\n", y); }
+			else if (takeinput == 4) { y -= 1; printf("y = %.2f\n", y); }
 
-			else if (takeinput == 5) { z += 5; printf("z = %.2f\n", z); }
+			else if (takeinput == 5) { z += 1; printf("z = %.2f\n", z); }
 
-			else if (takeinput == 6) { z -= 5; printf("z = %.2f\n", z); }
+			else if (takeinput == 6) { z -= 1; printf("z = %.2f\n", z); }
 
-			else if (takeinput == 7) { phi += 5; printf("phi = %.2f\n", phi); }
+			else if (takeinput == 7) { phi += 0.5; printf("phi = %.2f\n", phi); }
 
-			else if (takeinput == 8) { phi -= 5; printf("phi = %.2f\n", phi); }
+			else if (takeinput == 8) { phi -= 0.5; printf("phi = %.2f\n", phi); }
 
-			else if (takeinput == 9) { sigma += 5; printf("sigma = %.2f\n", sigma); }
+			else if (takeinput == 9) { sigma += 0.5; printf("sigma = %.2f\n", sigma); }
 
-			else if (takeinput == 10) { sigma -= 5; printf("sigma = %.2f\n", sigma); }
+			else if (takeinput == 10) { sigma -= 0.5; printf("sigma = %.2f\n", sigma); }
 
 			else if (takeinput == 11) { endprog = 0; printf("End program selected.\n"); }
 
@@ -86,7 +87,7 @@ int Dm_thread() {
 	int return_value;
 	return_value = 1;
 
-	while (return_value)
+	while (endprog)
 	{
 		printf("Starting Dynamixel motor thread.\n");
 		return_value = dm_main(&theta_4,&theta_5, &endprog);
@@ -102,11 +103,11 @@ int HEBI_thread() {
 int main(int argc, char* argv[]) {
 	// initialize values to home positon in mm and deg
 	endprog = 1;
-	x = 624.75;
+	x = 484.75;
 	y = 0.0;
 	z = 248.37;
-	phi = 0.0;
-	sigma = 90.0;
+	phi = 0;
+	sigma = 90;
 	char dum;
 	long int start_time;
 	long int cur_time;
@@ -128,8 +129,9 @@ int main(int argc, char* argv[]) {
 		Sleep(1000);
 	}
 	*/
-	input_ik.join();
+	
 	Dm.join();
+	input_ik.join();
 	HEBI.join();
 
 	return 0;

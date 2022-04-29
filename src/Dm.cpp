@@ -34,7 +34,7 @@
 #define PROTOCOL_VERSION                2.0                 // See which protocol version is used in the Dynamixel
 
 // Default setting
-#define DXL1_ID                         1                   // Dynamixel#1 ID: 1
+#define DXL1_ID                         1                  // Dynamixel#1 ID: 1
 #define DXL2_ID                         2                   // Dynamixel#2 ID: 2
 #define BAUDRATE                        57600
 #define DEVICENAME                      "COM5"      // Check which port is being used on your controller
@@ -44,7 +44,7 @@
 #define TORQUE_DISABLE                  0                   // Value for disabling the torque
 #define DXL1_MINIMUM_POSITION_VALUE     0             // Dynamixel will rotate between this value
 #define DXL1_MAXIMUM_POSITION_VALUE     4095              // and this value (note that the Dynamixel would not move when the position value is out of movable range. Check e-manual about the range of the Dynamixel you use.)
-#define DXL_MOVING_STATUS_THRESHOLD     10                  // Dynamixel moving status threshold
+#define DXL_MOVING_STATUS_THRESHOLD     20                  // Dynamixel moving status threshold
 #define DXL2_MINIMUM_POSITION_VALUE     0
 #define DXL2_MAXIMUM_POSITION_VALUE     4095
 #define ESC_ASCII_VALUE                 0x1b
@@ -122,12 +122,15 @@ int dm_main(double *theta_4, double *theta_5, int *endprog)
     int dxl_comm_result = COMM_TX_FAIL;               // Communication result
     bool dxl_addparam_result = false;                 // addParam result
     bool dxl_getdata_result = false;                  // GetParam result
-    int dxl1_goal_position;  // Goal position
-    int dxl2_goal_position;
-
+    int dxl1_goal_position[1] = {};  // Goal position
+    int dxl2_goal_position[1] = {};
+    double Ltheta_4;
+    double Ltheta_5;
     uint8_t dxl_error = 0;                            // Dynamixel error
     uint8_t param1_goal_position[4]{};
+    //uint8_t param1_goal_position;
     uint8_t param2_goal_position[4]{};
+    //uint8_t param2_goal_position;
     int32_t dxl1_present_position = 0, dxl2_present_position = 0;                         // Present position
 
     // Open port
@@ -201,18 +204,36 @@ int dm_main(double *theta_4, double *theta_5, int *endprog)
         fprintf(stderr, "[ID:%03d] groupSyncRead addparam failed", DXL2_ID);
         return 0;
     }
-
+    printf("Dm taking value\n");
     while (*endprog)
     {
-        printf("Press any key to continue! (or press ESC to quit!)\n");
-        if (_getch() == ESC_ASCII_VALUE)
-            break;
+        
         //gv.lock();
-        dxl1_goal_position = (int)(round((90 + *theta_4) / 0.087912));
-        dxl2_goal_position = (int)(round((*theta_5) / 0.087912));
+        Ltheta_4 = 180.0 + *theta_4;
+        if (Ltheta_4 >= 360) Ltheta_4 -= 360;
+        Ltheta_5 = *theta_5 + 105.0;
+        if (Ltheta_5 >= 360) Ltheta_5 -= 360;
+        dxl2_goal_position[0] = (int)(round(Ltheta_4 / 0.087912));
+        dxl1_goal_position[0] = (int)(round(Ltheta_5 / 0.087912));
         //gv.unlock();
+        int count = 0;
+        if (count >= 5) count = 0;
+        //param1_goal_position = DXL_HIBYTE(DXL_LOWORD(dxl1_goal_position));
+        //param2_goal_position = DXL_HIBYTE(DXL_LOWORD(dxl2_goal_position));
+
+        param1_goal_position[0] = DXL_LOBYTE(DXL_LOWORD(dxl1_goal_position[0]));
+        param1_goal_position[1] = DXL_HIBYTE(DXL_LOWORD(dxl1_goal_position[0]));
+        param1_goal_position[2] = DXL_LOBYTE(DXL_HIWORD(dxl1_goal_position[0]));
+        param1_goal_position[3] = DXL_HIBYTE(DXL_HIWORD(dxl1_goal_position[0]));
+
+        param2_goal_position[0] = DXL_LOBYTE(DXL_LOWORD(dxl2_goal_position[0]));
+        param2_goal_position[1] = DXL_HIBYTE(DXL_LOWORD(dxl2_goal_position[0]));
+        param2_goal_position[2] = DXL_LOBYTE(DXL_HIWORD(dxl2_goal_position[0]));
+        param2_goal_position[3] = DXL_HIBYTE(DXL_HIWORD(dxl2_goal_position[0]));
+        /*
         for (int i = 0; i < 4; i++) {
-            if (i % 2 == 0) {
+            if (i < 2) {
+
                 param1_goal_position[i] = DXL_LOBYTE(DXL_LOWORD(dxl1_goal_position));
                 param2_goal_position[i] = DXL_LOBYTE(DXL_LOWORD(dxl2_goal_position));
             }
@@ -221,11 +242,11 @@ int dm_main(double *theta_4, double *theta_5, int *endprog)
                 param2_goal_position[i] = DXL_HIBYTE(DXL_LOWORD(dxl2_goal_position));
             }
         }
-
+        */
 
         // Add Dynamixel#1 goal position value to the Syncwrite storage
-        for (int i = 0; i < 4; i++) {
-            dxl_addparam_result = groupSyncWrite.addParam(DXL1_ID, (param1_goal_position + i));
+
+            dxl_addparam_result = groupSyncWrite.addParam(DXL1_ID, param1_goal_position);
             if (dxl_addparam_result != true)
             {
                 fprintf(stderr, "[ID:%03d] groupSyncWrite addparam failed", DXL1_ID);
@@ -233,20 +254,20 @@ int dm_main(double *theta_4, double *theta_5, int *endprog)
             }
 
             // Add Dynamixel#2 goal position value to the Syncwrite parameter storage
-            dxl_addparam_result = groupSyncWrite.addParam(DXL2_ID, (param2_goal_position + i));
+            dxl_addparam_result = groupSyncWrite.addParam(DXL2_ID, param2_goal_position);
             if (dxl_addparam_result != true)
             {
                 fprintf(stderr, "[ID:%03d] groupSyncWrite addparam failed", DXL2_ID);
                 return 0;
             }
-        }
+        
         // Syncwrite goal position
         dxl_comm_result = groupSyncWrite.txPacket();
         if (dxl_comm_result != COMM_SUCCESS) printf("%s\n", packetHandler->getTxRxResult(dxl_comm_result));
 
         // Clear syncwrite parameter storage
         groupSyncWrite.clearParam();
-
+        printf("[ID:%03d] GoalPos:%03d  PresPos:%03d\t[ID:%03d] GoalPos:%03d  PresPos:%03d\n", DXL1_ID, dxl1_goal_position[0], dxl1_present_position, DXL2_ID, dxl2_goal_position[0], dxl2_present_position);
         do
         {
             // Syncread present position
@@ -286,9 +307,11 @@ int dm_main(double *theta_4, double *theta_5, int *endprog)
             // Get Dynamixel#2 present position value
             dxl2_present_position = groupSyncRead.getData(DXL2_ID, ADDR_PRO_PRESENT_POSITION, LEN_PRO_PRESENT_POSITION);
 
-            printf("[ID:%03d] GoalPos:%03d  PresPos:%03d\t[ID:%03d] GoalPos:%03d  PresPos:%03d\n", DXL1_ID, dxl1_goal_position, dxl1_present_position, DXL2_ID, dxl2_goal_position, dxl2_present_position);
+           // printf("[ID:%03d] GoalPos:%03d  PresPos:%03d\t[ID:%03d] GoalPos:%03d  PresPos:%03d\n", DXL1_ID, dxl1_goal_position[0], dxl1_present_position, DXL2_ID, dxl2_goal_position[0], dxl2_present_position);
 
-        } while ((abs(dxl1_goal_position - dxl1_present_position) > DXL_MOVING_STATUS_THRESHOLD) || (abs(dxl2_goal_position - dxl2_present_position) > DXL_MOVING_STATUS_THRESHOLD));
+            count++;
+
+        } while ((abs(dxl1_goal_position[0] - dxl1_present_position) > DXL_MOVING_STATUS_THRESHOLD) || (abs(dxl2_goal_position[0] - dxl2_present_position) > DXL_MOVING_STATUS_THRESHOLD) || count <5);
 
         // Change goal position
         if (index == 0)

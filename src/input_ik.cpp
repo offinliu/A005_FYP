@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <cmath>
 #include <conio.h>
 #define w10_2 1
 #if w10_2
@@ -38,7 +39,7 @@ void inverse_kinematics(double x, double y, double z, double *phi_o, double *sig
 	double phi = *phi_o;
 	double sigma = *sigma_o;
 	double theta_1;
-	double a1 = 371; // link 1
+	double a1 = 231; // link 1
 	double a2 = 194.75;// link 2
 	double a3 = 81.75; // link 3
 	double r3 = 97.77; // Distance between x3y3z3 and x4y4z4
@@ -95,15 +96,33 @@ void inverse_kinematics(double x, double y, double z, double *phi_o, double *sig
 	theta_3 = rad2deg(theta_3);
 	theta_4 = rad2deg(theta_4);
 	theta_5 = rad2deg(theta_5);
-	if (theta_1 && theta_2 && theta_3 && theta_4 && theta_5) {
+	/*
+	if (isnan(theta_1) || isnan(theta_2) || isnan(theta_3) || isnan(theta_4) || isnan(theta_5)) {
+		printf("Angle is NAN.\n");
+	}
+	else
+	{
 		*theta_1_o = theta_1;
 		*theta_2_o = theta_2;
 		*theta_3_o = theta_3;
 		*theta_4_o = theta_4;
 		*theta_5_o = theta_5;
+		printf("Angles updated.\n");
 	}
-	printf("Theta_1 = %.2f. Theta_2 = %.2f. Theta_3 = %.2f. Theta_4 = %.2f. Theta_5 = %.2f.\n", theta_1, theta_2, theta_3,
-		theta_4, theta_5);
+	*/
+
+	if (!isnan(theta_1)) *theta_1_o = theta_1;
+	if (!isnan(theta_2)) *theta_2_o = theta_2;
+	if (!isnan(theta_3)) *theta_3_o = theta_3;
+	if (!isnan(theta_4)) *theta_4_o = theta_4;
+	if (!isnan(theta_5)) *theta_5_o = theta_5;
+
+	//printf("Theta_1 = %.2f. Theta_2 = %.2f. Theta_3 = %.2f. Theta_4 = %.2f. Theta_5 = %.2f.\n", theta_1, theta_2, theta_3,
+		//theta_4, theta_5);
+		
+	printf("Theta_1 = %.2f. Theta_2 = %.2f. Theta_3 = %.2f. Theta_4 = %.2f. Theta_5 = %.2f.\n", *theta_1_o, *theta_2_o, *theta_3_o,
+		*theta_4_o, *theta_5_o);
+
 	printf("x = %.2f, y = %.2f, z = %.2f \n", x, y, z);
 
 }
@@ -118,10 +137,10 @@ int takeinput_keyboard() {
 			else if (ti == 's') return 2;
 			else if (ti == 'a') return 3;
 			else if (ti == 'd') return 4;
-			else if (ti == 'q') return 5;
-			else if (ti == 'e') return 6;
-			else if (ti == 'z') return 7;
-			else if (ti == 'x') return 8;
+			else if (ti == 'z') return 5;
+			else if (ti == 'x') return 6;
+			else if (ti == 'q') return 7;
+			else if (ti == 'e') return 8;
 			else if (ti == 'r') return 9;
 			else if (ti == 'f') return 10;
 			else if (ti == 'p') return 11;

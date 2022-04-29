@@ -1,6 +1,7 @@
 #ifndef INPUT_IK
 #define INPUT_IK
 #include <stdlib.h>
+#include <cmath>
 //#include "common.h"
 //#include "../src/mainlib.h"
 
